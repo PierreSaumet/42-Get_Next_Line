@@ -88,5 +88,8 @@ int		get_next_line(int fd, char **line)
 	ret = 0;
 	(void)fd;
 	(void)line;
+	(void)buffer;
+	(void)str;
+	(void)tmp;
 	return (ret);
 }
