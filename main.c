@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 		printf("ret = %d, and buffer = %s\n", ret, buffer);
 		free(buffer);
 		buffer = NULL;
-
+		close(fd);
 		// testing a simple read, should display the content of the file
 		if (argc == 2)
 		{
@@ -55,28 +55,40 @@ int	main(int argc, char **argv)
 			close(fd);
 		}
 		// testing multiple fd
-		//
+		if (argc == 3)
+		{
+			fd = open(argv[1], O_RDONLY);
+			ret = get_next_line(fd, &buffer);
+			printf("ret = %d, and buffer = %s\n", ret, buffer);
+			free(buffer);
+			buffer = NULL;
+			
+			int fd2;
+			fd2 = open(argv[2], O_RDONLY);
+			int ret2;
+			ret2 = get_next_line(fd2, &buffer);
+			printf("ret2 = %d, and buffer2 = %s\n", ret2, buffer);
+			free(buffer);
+			buffer = NULL;
+
+			while (ret != 0 || ret2 != 0)
+			{
+				ret = get_next_line(fd, &buffer);
+				printf("ret = %d, and buffer = %s\n", ret, buffer);
+				free(buffer);
+				buffer = NULL;
+				ret2 = get_next_line(fd2, &buffer);
+				printf("ret2 = %d, and buffer2 = %s\n", ret2, buffer);
+				free(buffer);
+				buffer = NULL;
+				//ret = get_next_line(fd, &buffer);
+			}
+			free(buffer);
+			buffer = NULL;
+			close(fd);
+			close(fd2);
+		}
 	}
-	
-	/*
-	fd = open(argv[1], O_WRONLY | O_APPEND);
-	if (fd < 0)
-		return (1);
-	else
-	{
-
-		printf("argc = %d and argv(1) = %s\n", argc, argv[1]);
-
-		printf("gnl = %d\n", get_next_line(fd, &buffer));
-		printf("buffer = %s\n", buffer);	
-	}
-	*/
-
-	(void)fd;
-	(void)ret;
-	(void)buffer;
-	(void)argc;
-	(void)argv;
 	return (0);
 }
 
@@ -84,3 +96,6 @@ int	main(int argc, char **argv)
 // ./a.out
 
 // cc -Wall -Wextra -D BUFFER_SIZE=42 main.c get_next_line.c get_next_line_utils.c
+
+// valgrind
+// cc -Wall -Wextra -D BUFFER_SIZE=42 main.c get_next_line.c get_next_line_utils.c && valgrind --leak-check=full ./a.out main.c get_next_line.h
