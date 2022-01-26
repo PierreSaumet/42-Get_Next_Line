@@ -22,6 +22,34 @@ void	ft_free(char **tab)
 	return ;
 }
 
+char	*ft_strchr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			return ((char *)str + i);
+		i++;
+	}
+	if (str[i] == '\n')
+		return ((char *)str + i);
+	return (0);
+}
+
+int		ft_strlen(char *str)
+{
+	int		i;
+
+	i = 0;
+	if (str == NULL)
+		return (-1);
+	while (str[i])
+		i++;
+	return (i);
+}
+
 int		get_next_line(int fd, char **line)
 {
 	int ret;
