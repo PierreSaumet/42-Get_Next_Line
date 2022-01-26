@@ -85,11 +85,21 @@ int		get_next_line(int fd, char **line)
 
 	if (fd < 0 || line == NULL)
 		return (-1);
-	ret = 0;
-	(void)fd;
-	(void)line;
-	(void)buffer;
-	(void)str;
-	(void)tmp;
-	return (ret);
+	while ((ret = read(fd, buffer, BUFFER_SIZE)) > 0)
+	{
+		if (ft_check_ret(line, ret) == 0)
+			return (0);
+		buffer[ret] = '\0';
+		if (str[fd] == NULL)
+			str[fd] = ft_strdup(buffer);
+		else
+		{
+			tmp = ft_strjoin(str[fd], buffer);
+			free(str[fd]);
+			str[fd] = tmp;
+		}
+		if (ft_strchr(str[fd]))
+			break ;
+	}
+	return (ft_final_check(str, line, ret, fd));
 }
