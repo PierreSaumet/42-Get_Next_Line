@@ -30,3 +30,25 @@ char	*ft_strdup(char *str1)
 	str2[i] = '\0';
 	return (str2);
 }
+
+
+char	*ft_substr(char *str, int c, int len)
+{
+	char	*dst;
+	int		i;
+
+	i = 0;
+	if (!str)
+		return (NULL);
+	if (ft_strlen(str) < c)
+		return (ft_strdup(""));
+	if (!(dst = malloc(len + 1)))
+		return (NULL);
+	while (i < len)
+	{
+		dst[i] = str[i + c];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
