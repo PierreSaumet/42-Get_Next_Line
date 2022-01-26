@@ -26,10 +26,22 @@ int	main(int argc, char **argv)
 		printf("fd = %ld GNL_ret = %d and buff = %s\n", 2147483648, get_next_line(2147483648, &buffer), buffer);
 		printf("fd = %ld GNL_ret = %d and buff = %s\n", -2147483649, get_next_line(-2147483649, &buffer), buffer);
 	
-		// testing a simple read
+
+		// testing empty file, should return 0
+		fd = open("empty.txt", O_RDONLY);
+		if (fd < 0)
+			return (1);
+		ret = get_next_line(fd, &buffer);
+		printf("ret = %d, and buffer = %s\n", ret, buffer);
+		free(buffer);
+		buffer = NULL;
+
+		// testing a simple read, should display the content of the file
 		if (argc == 2)
 		{
 			fd = open(argv[1], O_RDONLY);
+			if (fd < 0)
+				return (1);
 			ret = get_next_line(fd, &buffer);
 			while (ret == 1)
 			{
