@@ -12,6 +12,16 @@
 
 #include "get_next_line.h"
 
+void	ft_free(char **tab)
+{
+	if (tab != NULL && *tab != NULL)
+	{
+		free(*tab);
+		*tab = NULL;
+	}
+	return ;
+}
+
 int		get_next_line(int fd, char **line)
 {
 	int ret;
