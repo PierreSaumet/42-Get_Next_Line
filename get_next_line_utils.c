@@ -76,3 +76,36 @@ char	*ft_strjoin(char *str1, char *str2)
 	str[ft_strlen(str1) + i] = '\0';
 	return (str);
 }
+
+
+int		ft_final_check(char **str, char **line, int ret, int fd)
+{
+	int		i;
+
+	i = 0;
+	if (ret < 0)
+		i = -1;
+	else if (ret == 0 && str[fd] == NULL)
+	{
+		i = 0;
+		ft_free(line);
+		*line = ft_strdup("");
+	}
+	else
+	{
+		i = ft_gnl(&str[fd], line);
+		if (ret == 0 && str[fd] == NULL)
+			i = 0;
+	}
+	return (i);
+}
+
+int		ft_check_ret(char **line, int ret)
+{
+	if (ret == 0)
+	{
+		*line = ft_strdup("");
+		return (0);
+	}
+	return (1);
+}

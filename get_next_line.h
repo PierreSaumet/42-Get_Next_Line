@@ -22,5 +22,10 @@
 
 int		get_next_line(int fd, char **line);
 
+char	*ft_strchr(char *str);
+char	*ft_strdup(char *str1);
+char	*ft_substr(char *src, int c, int len);
+char	*ft_strjoin(char *str1, char *str2);
 
+void	ft_free(char **str);
 #endif
