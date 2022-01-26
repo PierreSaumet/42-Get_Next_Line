@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 		printf("argc = %d and argv(1) = %s\n", argc, argv[1]);
 
 		printf("gnl = %d\n", get_next_line(fd, &buffer));
+		printf("buffer = %s\n", buffer);	
 	}
 
 
