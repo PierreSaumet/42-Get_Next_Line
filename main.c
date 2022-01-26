@@ -20,6 +20,11 @@ int	main(int argc, char **argv)
 		printf("fd = %d GNL_ret = %d and buff = %s\n", 3, get_next_line(3, &buffer), buffer);
 		printf("fd = %d GNL_ret = %d and buff = %s\n", 1250834982, get_next_line(1250834982, &buffer), buffer);
 		printf("fd = %d GNL_ret = %d and buff = %s\n", 612985234, get_next_line(612985234, &buffer), buffer);
+		// testing overflow, compile without -Werror
+		printf("fd = %d GNL_ret = %d and buff = %s\n", 2147483647, get_next_line(2147483647, &buffer), buffer);
+		printf("fd = %ld GNL_ret = %d and buff = %s\n", -2147483648, get_next_line(-2147483648, &buffer), buffer);
+		printf("fd = %ld GNL_ret = %d and buff = %s\n", 2147483648, get_next_line(2147483648, &buffer), buffer);
+		printf("fd = %ld GNL_ret = %d and buff = %s\n", -2147483649, get_next_line(-2147483649, &buffer), buffer);
 	}
 	
 	/*
