@@ -52,8 +52,13 @@ int		ft_strlen(char *str)
 
 int		get_next_line(int fd, char **line)
 {
-	int ret;
+	int			ret;
+	static char	*str[1024];
+	char		buffer[BUFFER_SIZE + 1];
+	char		*tmp;
 
+	if (fd < 0 || line == NULL)
+		return (-1);
 	ret = 0;
 	(void)fd;
 	(void)line;
