@@ -52,3 +52,27 @@ char	*ft_substr(char *str, int c, int len)
 	dst[i] = '\0';
 	return (dst);
 }
+
+char	*ft_strjoin(char *str1, char *str2)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	if (!(str = (char *)malloc(sizeof(char) * (ft_strlen(str1) +
+			ft_strlen(str2)) + 1)))
+		return (NULL);
+	while (str1[i])
+	{
+		str[i] = str1[i];
+		i++;
+	}
+	i = 0;
+	while (str2[i])
+	{
+		str[ft_strlen(str1) + i] = str2[i];
+		i++;
+	}
+	str[ft_strlen(str1) + i] = '\0';
+	return (str);
+}
