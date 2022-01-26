@@ -25,6 +25,25 @@ int	main(int argc, char **argv)
 		printf("fd = %ld GNL_ret = %d and buff = %s\n", -2147483648, get_next_line(-2147483648, &buffer), buffer);
 		printf("fd = %ld GNL_ret = %d and buff = %s\n", 2147483648, get_next_line(2147483648, &buffer), buffer);
 		printf("fd = %ld GNL_ret = %d and buff = %s\n", -2147483649, get_next_line(-2147483649, &buffer), buffer);
+	
+		// testing a simple read
+		if (argc == 2)
+		{
+			fd = open(argv[1], O_RDONLY);
+			ret = get_next_line(fd, &buffer);
+			while (ret == 1)
+			{
+				printf("ret = %d, and buffer = %s\n", ret, buffer);
+				free(buffer);
+				buffer = NULL;
+
+				ret = get_next_line(fd, &buffer);
+			}
+			free(buffer);
+			close(fd);
+		}
+		// testing multiple fd
+		//
 	}
 	
 	/*
@@ -51,3 +70,5 @@ int	main(int argc, char **argv)
 
 //cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line.c get_next_line_utils.c
 // ./a.out
+
+// cc -Wall -Wextra -D BUFFER_SIZE=42 main.c get_next_line.c get_next_line_utils.c
