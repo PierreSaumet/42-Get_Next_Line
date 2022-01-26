@@ -50,28 +50,28 @@ int		ft_strlen(char *str)
 	return (i);
 }
 
-int		ft_gnl(char **s, char **line)
+int		ft_gnl(char **str, char **line)
 {
 	int		len;
 	char	*tmp;
 
 	len = 0;
-	while ((*s)[len] != '\n' && (*s)[len] != '\0')
+	while ((*str)[len] != '\n' && (*str)[len] != '\0')
 		len++;
-	if ((*s)[len] == '\n')
+	if ((*str)[len] == '\n')
 	{
-		if ((*s)[0] == '\0')
-			ft_free(s);
-		*line = ft_substr(*s, 0, len);
-		tmp = ft_strdup(&((*s)[len + 1]));
-		free(*s);
-		*s = tmp;
+		if ((*str)[0] == '\0')
+			ft_free(str);
+		*line = ft_substr(*str, 0, len);
+		tmp = ft_strdup(&((*str)[len + 1]));
+		free(*str);
+		*str = tmp;
 	}
 	else
 	{
-		*line = ft_strdup(*s);
-		ft_free(s);
-		s = NULL;
+		*line = ft_strdup(*str);
+		ft_free(str);
+		str = NULL;
 	}
 	return (1);
 }

@@ -21,6 +21,10 @@
 # include <stdio.h>
 
 int		get_next_line(int fd, char **line);
+int		ft_gnl(char **str, char **line);
+int		ft_strlen(char *str);
+int		ft_final_check(char **str, char **line, int ret, int fd);
+int		ft_check_ret(char **line, int ret);
 
 char	*ft_strchr(char *str);
 char	*ft_strdup(char *str1);
